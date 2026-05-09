@@ -7,11 +7,15 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct TinyGlowApp: App {
 
     init() {
+        // Initialise Firebase (Analytics + Crashlytics)
+        FirebaseApp.configure()
+
         // Set window background to sky blue before any SwiftUI view renders.
         // This eliminates the 1–2 frame white flash on cold app start.
         UIWindow.appearance().backgroundColor = UIColor(
