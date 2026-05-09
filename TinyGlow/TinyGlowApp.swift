@@ -2,16 +2,38 @@
 //  TinyGlowApp.swift
 //  TinyGlow
 //
-//  Created by Singh, Dev | Dev | LPD on 2026/05/04.
+//  App entry point.
+//  Status bar and home indicator are hidden for a distraction-free baby experience.
 //
 
 import SwiftUI
 
 @main
 struct TinyGlowApp: App {
+
+    init() {
+        // Set window background to sky blue before any SwiftUI view renders.
+        // This eliminates the 1–2 frame white flash on cold app start.
+        UIWindow.appearance().backgroundColor = UIColor(
+            red: 0.44, green: 0.78, blue: 0.95, alpha: 1
+        )
+    }
+
+    @State private var showSplash = true
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ZStack {
+                // ContentView is always rendered — no gap when splash fades out
+                ContentView()
+
+                if showSplash {
+                    SplashView { showSplash = false }
+                        .zIndex(1)
+                }
+            }
+            .statusBarHidden(true)
+            .persistentSystemOverlays(.hidden)
         }
     }
 }
