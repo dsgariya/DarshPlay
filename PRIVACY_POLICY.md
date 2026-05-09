@@ -1,3 +1,8 @@
+---
+layout: default
+title: Privacy Policy – Darsh Play
+---
+
 # Privacy Policy — Darsh Play
 
 **Effective date:** May 2025

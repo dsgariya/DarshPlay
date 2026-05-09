@@ -93,6 +93,22 @@ struct ParentControlsView: View {
                     }
                 }
 
+                // MARK: Legal
+                Section {
+                    Link(destination: URL(string: "https://dsgariya.github.io/DarshPlay/PRIVACY_POLICY")!) {
+                        HStack {
+                            Image(systemName: "hand.raised.fill")
+                                .foregroundColor(.secondary)
+                            Text("Privacy Policy")
+                                .foregroundColor(.primary)
+                            Spacer()
+                            Image(systemName: "arrow.up.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+
                 // MARK: Dismiss
                 Section {
                     Button("Done", role: .cancel) { dismiss() }
