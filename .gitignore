@@ -43,8 +43,8 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
-# Firebase — add GoogleService-Info.plist if you don't want it in version control
-# GoogleService-Info.plist
+# Firebase — contains API keys, never commit
+GoogleService-Info.plist
 
 # Xcode Playground
 playground.xcworkspace

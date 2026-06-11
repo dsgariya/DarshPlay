@@ -204,9 +204,12 @@ struct QuizQuestion {
 
     /// Generate a random question for the given category
     static func make(for category: ContentCategory) -> QuizQuestion {
-        let pool    = items(for: category)
-        let correct = pool.randomElement()!
-        let wrongs  = pool.filter { $0.id != correct.id }.shuffled().prefix(3)
+        let pool = items(for: category)
+        guard let correct = pool.randomElement() else {
+            // All categories are guaranteed non-empty; this path is unreachable in production.
+            preconditionFailure("Content pool for category '\(category.rawValue)' is empty.")
+        }
+        let wrongs = pool.filter { $0.id != correct.id }.shuffled().prefix(3)
         return QuizQuestion(
             correct: correct,
             choices: ([correct] + Array(wrongs)).shuffled()

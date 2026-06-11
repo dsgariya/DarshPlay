@@ -40,6 +40,7 @@ struct CalmModeView: View {
     var body: some View {
         ZStack {
             background.ignoresSafeArea()
+                .onAppear { TinyGlowAnalytics.logCalmModeEntered() }
 
             // Sparkle layer
             ForEach(sparkles) { sparkle in
@@ -95,6 +96,7 @@ struct CalmModeView: View {
 
     private func addSparkle(at position: CGPoint) {
         audio.chime(enabled: settings.isSoundEnabled)
+        TinyGlowAnalytics.logCalmModeTapped()
 
         let sparkle = Sparkle(position: position)
         sparkles.append(sparkle)

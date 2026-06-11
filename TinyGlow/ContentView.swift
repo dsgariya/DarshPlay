@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseCrashlytics
 
 private enum Screen {
     case home
@@ -45,12 +46,15 @@ struct ContentView: View {
                     settings: settings,
                     audio:    audio,
                     onLearn: { category in
+                        TinyGlowAnalytics.logCategoryOpened(category)
                         settings.selectedCategory = category
                         settings.isInCalmMode     = false
                         currentIndex = 0
                         withAnimation(.easeInOut(duration: 0.35)) { screen = .learning }
+                        TinyGlowAnalytics.logItemViewed(items(for: category)[0], category: category)
                     },
                     onQuiz: { category in
+                        TinyGlowAnalytics.logQuizStarted(category)
                         settings.selectedCategory = category
                         withAnimation(.easeInOut(duration: 0.35)) { screen = .quiz }
                     }
@@ -72,6 +76,7 @@ struct ContentView: View {
         }
         .animation(.easeInOut(duration: 0.35), value: screen)
         .animation(.easeInOut(duration: 0.35), value: settings.isInCalmMode)
+        .onAppear { TinyGlowAnalytics.logSessionStart() }
         .sheet(isPresented: $showParentSheet) {
             ParentControlsView(settings: settings, audio: audio, onGoHome: goHome)
         }
@@ -151,6 +156,7 @@ struct ContentView: View {
             ? "\(currentItem.name), \(currentItem.soundText)"
             : currentItem.soundText
         audio.speak(speech, enabled: settings.isSoundEnabled)
+        TinyGlowAnalytics.logItemTapped(currentItem, category: settings.selectedCategory)
         bounce()
     }
 
@@ -162,9 +168,11 @@ struct ContentView: View {
     }
 
     private func advanceItem(direction: Int = 1) {
+        TinyGlowAnalytics.logItemSwiped(currentItem, category: settings.selectedCategory, direction: direction)
         withAnimation(.easeOut(duration: 0.28)) { itemOpacity = 0 }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.28) {
             currentIndex = (currentIndex + direction + currentItems.count) % currentItems.count
+            TinyGlowAnalytics.logItemViewed(currentItem, category: settings.selectedCategory)
             withAnimation(.easeIn(duration: 0.38)) { itemOpacity = 1 }
         }
     }
@@ -204,4 +212,6 @@ struct ContentView: View {
     }
 }
 
-#Preview { ContentView() }
+#Preview {
+    ContentView()
+}

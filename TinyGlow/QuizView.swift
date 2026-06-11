@@ -149,6 +149,13 @@ struct QuizView: View {
         isLocked = true
         tappedID = choice.id
 
+        TinyGlowAnalytics.logQuizAnswered(
+            correct:  question.correct,
+            tapped:   choice,
+            category: settings.selectedCategory,
+            score:    score
+        )
+
         if choice.id == question.correct.id {
             isAnsweredRight = true
             score += 1

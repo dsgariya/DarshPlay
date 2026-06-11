@@ -95,7 +95,7 @@ struct ParentControlsView: View {
 
                 // MARK: Legal
                 Section {
-                    Link(destination: URL(string: "https://dsgariya.github.io/DarshPlay/PRIVACY_POLICY")!) {
+                    Link(destination: URL(string: "https://devgariya.github.io/DarshPlay/PRIVACY_POLICY")!) {
                         HStack {
                             Image(systemName: "hand.raised.fill")
                                 .foregroundColor(.secondary)

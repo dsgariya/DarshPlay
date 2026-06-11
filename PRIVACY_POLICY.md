@@ -7,8 +7,8 @@ title: Privacy Policy – Darsh Play
 
 **Effective date:** May 2025
 **App name:** Darsh Play
-**Developer:** dsgariya
-**Contact:** _(add your email here before submitting to App Store)_
+**Developer:** devgariya
+**Contact:** devgariya.gariya@gmail.com
 
 ---
 
@@ -97,8 +97,8 @@ We may update this Privacy Policy from time to time. Any changes will be reflect
 
 If you have any questions or concerns about this Privacy Policy or the app's data practices, please contact:
 
-**Email:** _(add your email here)_
-**GitHub:** https://github.com/dsgariya/DarshPlay
+**Email:** devgariya.gariya@gmail.com
+**GitHub:** https://github.com/devgariya/DarshPlay
 
 ---
 

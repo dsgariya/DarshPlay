@@ -10,6 +10,7 @@ import SwiftUI
 
 // MARK: - Home View
 
+@available(iOS 17.0, *)
 struct HomeView: View {
 
     @ObservedObject var settings       : AppSettings
@@ -77,6 +78,7 @@ struct HomeView: View {
 
 /// Mirrors the system press state into a binding so the parent card can
 /// animate as a whole — without using DragGesture, which blocks ScrollView.
+@available(iOS 17.0, *)
 private struct CardPressStyle: ButtonStyle {
     @Binding var isPressed: Bool
     func makeBody(configuration: Configuration) -> some View {
@@ -85,6 +87,7 @@ private struct CardPressStyle: ButtonStyle {
     }
 }
 
+@available(iOS 17.0, *)
 private struct CategoryCard: View {
 
     let category  : ContentCategory
@@ -212,10 +215,14 @@ private struct CategoryCard: View {
 }
 
 #Preview {
-    HomeView(
-        settings: AppSettings(),
-        audio:    AudioManager(),
-        onLearn:  { _ in },
-        onQuiz:   { _ in }
-    )
+    if #available(iOS 17.0, *) {
+        HomeView(
+            settings: AppSettings(),
+            audio:    AudioManager(),
+            onLearn:  { _ in },
+            onQuiz:   { _ in }
+        )
+    } else {
+        // Fallback on earlier versions
+    }
 }

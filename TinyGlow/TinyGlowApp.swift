@@ -23,21 +23,11 @@ struct TinyGlowApp: App {
         )
     }
 
-    @State private var showSplash = true
-
     var body: some Scene {
         WindowGroup {
-            ZStack {
-                // ContentView is always rendered — no gap when splash fades out
-                ContentView()
-
-                if showSplash {
-                    SplashView { showSplash = false }
-                        .zIndex(1)
-                }
-            }
-            .statusBarHidden(true)
-            .persistentSystemOverlays(.hidden)
+            ContentView()
+                .statusBarHidden(true)
+                .persistentSystemOverlays(.hidden)
         }
     }
 }
